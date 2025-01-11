@@ -7,7 +7,7 @@
 *   **Scraping multiplataforma**: Se apoya en [JobSpy](https://github.com/Bunsly/JobSpy) para extraer datos de diversas fuentes.
 *   **Filtros flexibles**: Definidos en `filter_params.py` y aplicados en `myfilters.py`.
 *   **Resultados paginados**: Muestra los trabajos en grupos de 10 filas, facilitando la revisión.
-*   **Modularidad**: Código organizado en módulos (`Scrap.py`, `myfilters.py`, `filter_params.py`, etc.).
+*   **Modularidad**: Código organizado en módulos (`JobThis.py`, `myfilters.py`, `filter_params.py`, etc.).
 
 ## Requisitos
 
