@@ -12,13 +12,3 @@
 ## Requisitos
 
 Las dependencias necesarias están en `requirements.txt`:
-
-pandas
-requests
-tls-client
-markdownify
-numpy
-beautifulsoup4
-pydantic
-regex
-tqdm
