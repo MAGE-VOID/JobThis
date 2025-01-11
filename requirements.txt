@@ -1,0 +1,9 @@
+pandas
+requests
+tls-client
+markdownify
+numpy
+beautifulsoup4
+pydantic
+regex
+tqdm

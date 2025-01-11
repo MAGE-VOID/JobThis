@@ -1,0 +1,13 @@
+# Ignora el archivo Route.py
+Route.py
+
+# Ignora el archivo test.py
+test.py
+
+# Ignora todas las carpetas __pycache__ que haya
+__pycache__/
+
+# Opcionalmente, para ignorar archivos Python compilados:
+*.pyc
+*.pyo
+*.pyd
