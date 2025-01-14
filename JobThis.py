@@ -30,48 +30,54 @@ def paginate_and_display(df: pd.DataFrame, page_size: int = 10):
 
     while True:
         end_index = start_index + page_size
-        # Extraemos la "página" actual
         subset = df.iloc[start_index:end_index]
 
         if subset.empty:
             print("No hay más filas por mostrar.")
             break
 
-        print(subset)  # Muestra la página actual
+        print(subset)
         start_index = end_index
 
         if start_index >= total_rows:
             print("Has llegado al final de los resultados.")
             break
 
-        user_input = input("\nPresiona [Enter] para ver la siguiente página o 'q' para salir: ")
-        if user_input.lower() == 'q':
+        user_input = input(
+            "\nPresiona [Enter] para ver la siguiente página o 'q' para salir: "
+        )
+        if user_input.lower() == "q":
             print("Saliendo de la paginación.")
             break
+
 
 def main():
     # 1) Configura el scraper
     scraper = JobScraper(
-        exclude_countries=["venezuela"],  
+        exclude_countries=["venezuela"],
         sites_to_query=["indeed", "glassdoor", "zip_recruiter"],
         results_wanted=100,
         verbose=0,
         max_workers=5,
     )
+    # Se obtienen los datos (un DataFrame)
     raw_df = scraper.run_scraping()
 
-    # 2) Aplica los filtros desde filter_params
+    # 2) Elimina duplicados usando 'title' + 'description'
+    #    Esto unifica ofertas que tengan exactamente el mismo título y descripción
+    raw_df = raw_df.drop_duplicates(subset=["title"], keep="first")
+
+    # 3) Aplica los filtros desde filter_params
     final_df = apply_filters(raw_df, filter_parameters)
 
-    # 3) Truncar la columna de descripción
+    # 4) Truncar la columna de descripción
     final_df = truncate_column(final_df, "description", 77)
 
-    # 4) Mostrar resultados con paginación
+    # 5) Mostrar resultados con paginación
     pd.set_option("display.max_colwidth", None)
     print("Resultados filtrados:")
     print(f"Cantidad de trabajos finales: {len(final_df)}\n")
 
-    # Llamamos a la función de paginación
     paginate_and_display(final_df, page_size=10)
 
 
